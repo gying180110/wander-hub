@@ -36,7 +36,9 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 request.getTitle(),
                 request.getContent(),
                 request.getActive(),
+                request.getPinned(),
                 request.getPlaySeconds(),
+                request.getExpireTime(),
                 request.getSortNo()
         );
     }

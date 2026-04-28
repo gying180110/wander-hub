@@ -16,17 +16,19 @@ public class AnnouncementRepository {
     }
 
     public List<AnnouncementEntity> listActive() {
-        String sql = "select id, title, content, active, play_seconds, sort_no, create_time from t_announcement where active = 1 order by sort_no asc, id desc";
+        String sql = "select id, title, content, active, pinned, play_seconds, expire_time, sort_no, create_time " +
+                "from t_announcement where active = 1 and (expire_time is null or expire_time > now()) " +
+                "order by pinned desc, sort_no asc, id desc";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AnnouncementEntity>(AnnouncementEntity.class));
     }
 
     public List<AnnouncementEntity> listAll() {
-        String sql = "select id, title, content, active, play_seconds, sort_no, create_time from t_announcement order by sort_no asc, id desc";
+        String sql = "select id, title, content, active, pinned, play_seconds, expire_time, sort_no, create_time from t_announcement order by pinned desc, sort_no asc, id desc";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<AnnouncementEntity>(AnnouncementEntity.class));
     }
 
-    public int create(String title, String content, Integer active, Integer playSeconds, Integer sortNo) {
-        String sql = "insert into t_announcement (title, content, active, play_seconds, sort_no) values (?, ?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, title, content, active, playSeconds, sortNo);
+    public int create(String title, String content, Integer active, Integer pinned, Integer playSeconds, java.util.Date expireTime, Integer sortNo) {
+        String sql = "insert into t_announcement (title, content, active, pinned, play_seconds, expire_time, sort_no) values (?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, title, content, active, pinned, playSeconds, expireTime, sortNo);
     }
 }

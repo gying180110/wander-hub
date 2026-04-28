@@ -8,6 +8,7 @@ public class ChangeLogEntity {
     private String moduleName;
     private String changePoint;
     private String changeFile;
+    private String gitCommit;
     private Date createTime;
 
     public Long getId() {
@@ -48,6 +49,14 @@ public class ChangeLogEntity {
 
     public void setChangeFile(String changeFile) {
         this.changeFile = changeFile;
+    }
+
+    public String getGitCommit() {
+        return gitCommit;
+    }
+
+    public void setGitCommit(String gitCommit) {
+        this.gitCommit = gitCommit;
     }
 
     public Date getCreateTime() {

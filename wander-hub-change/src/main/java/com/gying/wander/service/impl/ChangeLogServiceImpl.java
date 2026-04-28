@@ -30,7 +30,8 @@ public class ChangeLogServiceImpl implements ChangeLogService {
                 request.getVersionNo(),
                 request.getModuleName(),
                 request.getChangePoint(),
-                request.getChangeFile()
+                request.getChangeFile(),
+                GitInfoResolver.currentCommit()
         );
     }
 }

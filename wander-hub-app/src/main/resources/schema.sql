@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS t_announcement (
     title VARCHAR(128) NOT NULL,
     content TEXT NOT NULL,
     active TINYINT NOT NULL DEFAULT 1,
+    pinned TINYINT NOT NULL DEFAULT 0,
     play_seconds INT NOT NULL DEFAULT 5,
+    expire_time TIMESTAMP NULL DEFAULT NULL,
     sort_no INT NOT NULL DEFAULT 100,
     create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -34,5 +36,6 @@ CREATE TABLE IF NOT EXISTS t_change_log (
     module_name VARCHAR(64) NOT NULL,
     change_point VARCHAR(255) NOT NULL,
     change_file VARCHAR(255) NOT NULL,
+    git_commit VARCHAR(64) NOT NULL DEFAULT '',
     create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

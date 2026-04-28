@@ -7,7 +7,9 @@ public class AnnouncementEntity {
     private String title;
     private String content;
     private Integer active;
+    private Integer pinned;
     private Integer playSeconds;
+    private Date expireTime;
     private Integer sortNo;
     private Date createTime;
 
@@ -51,12 +53,28 @@ public class AnnouncementEntity {
         this.playSeconds = playSeconds;
     }
 
+    public Integer getPinned() {
+        return pinned;
+    }
+
+    public void setPinned(Integer pinned) {
+        this.pinned = pinned;
+    }
+
     public Integer getSortNo() {
         return sortNo;
     }
 
     public void setSortNo(Integer sortNo) {
         this.sortNo = sortNo;
+    }
+
+    public Date getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(Date expireTime) {
+        this.expireTime = expireTime;
     }
 
     public Date getCreateTime() {
