@@ -11,6 +11,17 @@ Tech stack:
 - Redis (token storage, with in-memory fallback)
 - Elasticsearch (note/ai log indexing, non-blocking fallback)
 
+## module layout (feature-based)
+
+- `wander-hub-common`: shared model and response objects
+- `wander-hub-infra`: infrastructure configuration (ES/RestTemplate/properties)
+- `wander-hub-auth`: login authentication domain
+- `wander-hub-note`: notes domain
+- `wander-hub-ai`: ai chat domain
+- `wander-hub-announce`: announcement domain
+- `wander-hub-change`: change log domain
+- `wander-hub-app`: application bootstrap and global web config
+
 ## 1. Run locally
 
 ### 1.1 Prepare database
@@ -39,7 +50,7 @@ You can override with env vars:
 ### 1.2 Start service
 
 ```bash
-mvn spring-boot:run
+mvn -pl wander-hub-app -am spring-boot:run
 ```
 
 Backend URL: `http://127.0.0.1:8080/wander-hub`
@@ -51,7 +62,7 @@ Health check:
 ## 2. Build
 
 ```bash
-mvn -DskipTests package
+mvn -pl wander-hub-app -am -DskipTests package
 ```
 
 ## 3. Database init
@@ -125,6 +136,23 @@ All responses use:
 ```
 
 If `ai.base-url` is empty, service returns local mock answer.
+
+### 4.5 User and permission
+
+- `GET /api/auth/me`
+- `GET /api/auth/users` (ADMIN/`USER_MANAGE`)
+- `POST /api/auth/users` (ADMIN/`USER_MANAGE`)
+
+### 4.6 Announcement
+
+- `GET /api/announcements/play` (public play list)
+- `GET /api/announcements` (ADMIN/`ANNOUNCEMENT_MANAGE`)
+- `POST /api/announcements` (ADMIN/`ANNOUNCEMENT_MANAGE`)
+
+### 4.7 Change log
+
+- `GET /api/changelog`
+- `POST /api/changelog` (ADMIN/`CHANGELOG_MANAGE`)
 
 ## 5. Frontend integration
 
