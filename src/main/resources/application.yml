@@ -1,0 +1,32 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /wander-hub
+
+spring:
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://127.0.0.1:3306/wander?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    database: ${REDIS_DB:0}
+    timeout: 2000ms
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+ai:
+  # 如果留空则走本地模拟回复
+  base-url: ""
+  api-key: ""
+  model: "gpt-4o-mini"
+
+elasticsearch:
+  host: ${ES_HOST:127.0.0.1}
+  port: ${ES_PORT:9200}
+  scheme: ${ES_SCHEME:http}
