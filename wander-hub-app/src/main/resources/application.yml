@@ -2,10 +2,12 @@ server:
   port: 8080
   servlet:
     context-path: /wander-hub
+  tomcat:
+    uri-encoding: UTF-8
 
 spring:
   datasource:
-    url: ${MYSQL_URL:jdbc:mysql://127.0.0.1:3306/wander?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    url: ${MYSQL_URL:jdbc:mysql://127.0.0.1:3306/wander?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&connectionCollation=utf8mb4_general_ci&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,6 +21,11 @@ spring:
       mode: always
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 ai:
   # 如果留空则走本地模拟回复
